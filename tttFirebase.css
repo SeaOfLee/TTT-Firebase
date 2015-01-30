@@ -1,0 +1,31 @@
+.cell {
+  border: 1px solid orange;
+  display: inline-block;
+}
+
+.selected {
+  background-color: lightgray;
+}
+
+#container {
+  width: 465px;
+  height: 465px;
+}
+
+.square {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  border-radius: 15px;
+  font-size: 30px;
+  color: black;
+  background-color: #33CCFF;
+  margin: 1px;
+}
+
+#main #container{
+  margin: 0px auto;
+}
+h1 {
+  text-align: center;
+}

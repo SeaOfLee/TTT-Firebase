@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="tttFirebase.css">
+  <script src="angular.min.js"></script>
+  <!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.2/angularfire.min.js"></script>
+  <script src="tttFirebase.js"></script>
+  <title>T/T/T</title>
+</head>
+<body ng-app="ticTacApp">
+<h1>Tic/Tac/Toe</h1>
+<div id="main">
+  <div ng-controller="ticTacCtrl">
+    <div id="container">
+      <div ng-repeat="row in board track by $index">
+        <div class="square" id="row{{ $parent.$index}}column{{ $index }}"
+          ng-repeat="cell in row track by $index" ng-click="makeChoice($parent.$index, $index)">
+          {{ cell == "" ? "&nbsp;" : cell }}
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>
