@@ -6,7 +6,7 @@ app.controller('ticTacCtrl', function($scope, $firebase){
 // creates a reference to firebase data. 
 var boardRef = new Firebase("https://leettt.firebaseio.com/board");
 
-var sync = $firebase(ref);
+var sync = $firebase(ref);  
 
 // want to sync board array with firebase
 $scope.board = sync.$asArray();
