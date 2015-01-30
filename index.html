@@ -15,9 +15,9 @@
 <div id="main">
   <div ng-controller="ticTacCtrl">
     <div id="container">
-      <div ng-repeat="row in board track by $index">
+      <!-- <div ng-repeat="row in board track by $index"> -->
         <div class="square" id="row{{ $parent.$index}}column{{ $index }}"
-          ng-repeat="cell in row track by $index" ng-click="makeChoice($parent.$index, $index)">
+          ng-repeat="box in board" ng-click="makeChoice($parent.$index, $index)">
           {{ cell == "" ? "&nbsp;" : cell }}
         </div>
       </div>

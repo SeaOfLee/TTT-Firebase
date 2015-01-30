@@ -4,14 +4,22 @@ var app = angular.module('ticTacApp', ['firebase']);
 app.controller('ticTacCtrl', function($scope, $firebase){
 
 // creates a reference to firebase data. 
-var boardRef = new Firebase("https://leettt.firebaseio.com/board");
+var ref = new Firebase("https://leettt.firebaseio.com/board");
 
 var sync = $firebase(ref);
 
 // want to sync board array with firebase
 $scope.board = sync.$asArray();
 
-  $scope.board = [["", "", ""], ["", "", ""], ["", "", ""]];
+$scope.board.$loaded(function () {
+  if($scope.board.length === 0) {
+    for (var i = 0; i < 9; i++) {
+      $scope.board.$add("");
+    }
+  }
+});
+
+  // $scope.board = [["", "", ""], ["", "", ""], ["", "", ""]];
   
 // function to check if win conditions are met, will run after every turn. When winner is chosen p1/p2 win function is called.
 function checkWin() {
