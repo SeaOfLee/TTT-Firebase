@@ -23,6 +23,10 @@
   margin: 1px;
 }
 
+.square:hover {
+  background-color: #006181;
+}
+
 #main #container{
   margin: 0px auto;
 }

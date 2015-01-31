@@ -13,22 +13,34 @@ var counterRef = new Firebase("https://leettt.firebaseio.com/counter");
 var counterSync = $firebase(counterRef);
 $scope.counter = counterSync.$asArray();
 
-// creates empty board object in Firebase with choice property, will keep track of score
+// To keep track of score in Firebase
 $scope.board.$loaded(function () {
+  // if board object doesn't exist, creates "board" object in Firebase with "choice" property, populated with an empty string.
   if($scope.board.length === 0) {
-    for (var i = 0; i < 9; i++) {
+    for (i = 0; i < 9; i++) {
       $scope.board.$add({choice: ''});
+    }
+  }
+  else {
+    for (i = 0; i < 9; i++) {
+      $scope.board.$save({choice: ''});
     }
   }
 });
 
+// on load, checks if counter exists. If it doesn't, creates turnNumber property and sets it to 0.
+// also creates p1/p2WinTotal properties and sets them to 0. Will get incremented with every win.
+// if counter does exists, overwrites ($save) turnNumber to 0.
 $scope.counter.$loaded(function(){
    console.log('Counter Loaded');
-   if ($scope.counter.length == 0){ 
-     $scope.counter.$add({turnNum: 0})
+   if ($scope.counter.length === 0){ 
+     $scope.counter.$add({turnNumber: 0});
+     $scope.counter.$add({p1WinTotal: 0});
+     $scope.counter.$add({p2WinTotal: 0});
+     $scope.counter.$add({player: 1});
    } 
    else {
-     $scope.counter[0].turnNum = 0;
+     $scope.counter[0].turnNumber = 0;
      $scope.counter.$save(0);
    }
 
@@ -40,12 +52,23 @@ $scope.counter.$loaded(function(){
 
   $scope.makeChoice = function(idx) {
     console.log('clicked ' + idx + ' from makeChoice');
+    if($scope.counter[3].player == 1) {
     $scope.board[idx].choice = "X";
     $scope.board.$save($scope.board[idx]);
-      $scope.turnNumber++;
-      // checkWin();
-    };
-  
+    $scope.counter[0].turnNumber++;
+    $scope.counter.$save(0);
+    $scope.counter[3].player++;
+    console.log($scope.counter[3].player);
+    }
+    else {
+    $scope.board[idx].choice = "0";
+    $scope.board.$save($scope.board[idx]);
+    $scope.counter[0].turnNumber++;
+    $scope.counter.$save(0);
+    $scope.counter[3].player--;
+    console.log($scope.counter[3].player);
+    }
+  };
 // function to check if win conditions are met, will run after every turn. When winner is chosen p1/p2 win function is called.
 // function checkWin() {
 //   for(i = 0; i < 3; i++)
@@ -106,8 +129,8 @@ $scope.counter.$loaded(function(){
   // };
 
   // Win totals increment after p1/p2Wins function is called. 
-  $scope.p1WinTotal = 0;
-  $scope.p2WinTotal = 0;
+  // $scope.p1WinTotal = 0;
+  // $scope.p2WinTotal = 0;
 
   function p1Wins() {
     alert("X Wins!");
