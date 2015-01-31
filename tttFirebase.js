@@ -26,11 +26,10 @@ $scope.counter.$loaded(function(){
    console.log('Counter Loaded');
    if ($scope.counter.length == 0){ 
      $scope.counter.$add({turnNum: 0})
-     console.log('Went into if scope counter length = 0.');
    } 
    else {
      $scope.counter[0].turnNum = 0;
-     $scope.counter.$save(0); //saves first element in counter
+     $scope.counter.$save(0);
    }
 
   });
