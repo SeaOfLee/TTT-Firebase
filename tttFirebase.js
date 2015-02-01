@@ -32,7 +32,8 @@ $scope.board.$loaded(function () {
 
 // on load, checks if counter exists. If it doesn't, creates turnNumber property and sets it to 0.
 // also creates p1/p2WinTotal properties and sets them to 0. Will get incremented with every win.
-// if counter does exists, overwrites ($save) turnNumber to 0 and sets player to 1.
+// Creates p1/p2Won properties and sets them to false. These are used to trigger ng-show/hide win condition messages.
+// if counter does exist, overwrites ($save) turnNumber to 0 and sets player to 1.
 $scope.counter.$loaded(function(){
    console.log('Counter Loaded');
    if ($scope.counter.length === 0){ 
@@ -43,6 +44,9 @@ $scope.counter.$loaded(function(){
      $scope.counter.$add({p1Won: false});
      $scope.counter.$add({p2Won: false});
      $scope.counter.$add({tie: false});
+     $scope.counter.$add({p1: false});
+     $scope.counter.$add({p2: false});
+
    } 
    else {
      $scope.counter[0].turnNumber = 0;
@@ -68,8 +72,16 @@ $scope.counter.$loaded(function(){
   // Increments turnNumber and runs checkWin function after every click.
 
   $scope.makeChoice = function(idx) {
+    if($scope.counter[0].turnNumber == 0) {
+      $scope.counter[7].p1 = true;
+      console.log("P1 is true");
+    }
+    else if (($scope.counter[0].turnNumber == 1) && ($scope.counter[7].p1 !== true)) {
+      $scope.counter[8].p2 = true;
+      console.log("P2 is true");
+    }
     console.log('clicked ' + idx + ' from makeChoice');
-    if(($scope.counter[3].player == 1) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O")) {
+    if(($scope.counter[3].player == 1) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O") && $scope.counter[7].p1 === true) {
     $scope.board[idx].choice = "X";
     $scope.board.$save($scope.board[idx]);
     $scope.counter[0].turnNumber++;
@@ -79,7 +91,7 @@ $scope.counter.$loaded(function(){
     console.log("Next move to player " + $scope.counter[3].player);
     console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
-    else if (($scope.counter[3].player == 2) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O")){
+    else if (($scope.counter[3].player == 2) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O") && $scope.counter[8].p2 === true){
     $scope.board[idx].choice = "O";
     $scope.board.$save($scope.board[idx]);
     $scope.counter[0].turnNumber++;
@@ -144,7 +156,7 @@ $scope.counter.$loaded(function(){
     if (($scope.board[2].choice === "O") && ($scope.board[4].choice === "O") && ($scope.board[6].choice === "O")) {
       p2Wins();
     }
-    if (($scope.counter[0].turnNumber == 9) && (($scope.counter[4].p1Won === false) && ($scope.counter[5].p2Won == false))) {
+    if (($scope.counter[0].turnNumber == 9) && (($scope.counter[4].p1Won === false) && ($scope.counter[5].p2Won === false))) {
       tie();
     }
   }
@@ -190,7 +202,6 @@ $scope.counter.$loaded(function(){
      $scope.counter.$save(5);
      $scope.counter[6].tie = false;
      $scope.counter.$save(6);
-
   };
 
 });//end of controller
