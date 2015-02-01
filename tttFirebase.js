@@ -32,7 +32,7 @@ $scope.board.$loaded(function () {
 
 // on load, checks if counter exists. If it doesn't, creates turnNumber property and sets it to 0.
 // also creates p1/p2WinTotal properties and sets them to 0. Will get incremented with every win.
-// if counter does exists, overwrites ($save) turnNumber to 0.
+// if counter does exists, overwrites ($save) turnNumber to 0 and sets player to 1.
 $scope.counter.$loaded(function(){
    console.log('Counter Loaded');
    if ($scope.counter.length === 0){ 
@@ -44,6 +44,8 @@ $scope.counter.$loaded(function(){
    else {
      $scope.counter[0].turnNumber = 0;
      $scope.counter.$save(0);
+     $scope.counter[3].player = 1;
+     $scope.counter.$save(3);
    }
 
   });
