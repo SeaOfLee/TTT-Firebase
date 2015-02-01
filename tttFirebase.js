@@ -76,7 +76,7 @@ $scope.counter.$loaded(function(){
       $scope.counter[7].p1 = true;
       console.log("P1 is true");
     }
-    else if (($scope.counter[0].turnNumber == 1) && ($scope.counter[7].p1 !== true)) {
+    else if (($scope.counter[0].turnNumber == 1) && ($scope.counter[7].p1 == false)) {
       $scope.counter[8].p2 = true;
       console.log("P2 is true");
     }
@@ -202,6 +202,9 @@ $scope.counter.$loaded(function(){
      $scope.counter.$save(5);
      $scope.counter[6].tie = false;
      $scope.counter.$save(6);
+     $scope.counter[7].p1 = false;
+     $scope.counter[8].p2 = false;
+
   };
 
 });//end of controller
