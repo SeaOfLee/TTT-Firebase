@@ -52,7 +52,7 @@ $scope.counter.$loaded(function(){
 
   $scope.makeChoice = function(idx) {
     console.log('clicked ' + idx + ' from makeChoice');
-    if($scope.counter[3].player == 1) {
+    if(($scope.counter[3].player == 1) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O")) {
     $scope.board[idx].choice = "X";
     $scope.board.$save($scope.board[idx]);
     $scope.counter[0].turnNumber++;
@@ -63,7 +63,7 @@ $scope.counter.$loaded(function(){
     console.log("Next move to player " + $scope.counter[3].player);
     console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
-    else {
+    else if (($scope.counter[3].player == 2) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O")){
     $scope.board[idx].choice = "O";
     $scope.board.$save($scope.board[idx]);
     $scope.counter[0].turnNumber++;
