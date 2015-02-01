@@ -58,6 +58,8 @@ $scope.counter.$loaded(function(){
     $scope.counter[0].turnNumber++;
     $scope.counter.$save(0);
     $scope.counter[3].player++;
+    $scope.counter.$save(3);
+    // $scope.counter[3].player.$save();
     console.log("Next move to player " + $scope.counter[3].player);
     console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
@@ -67,7 +69,8 @@ $scope.counter.$loaded(function(){
     $scope.counter[0].turnNumber++;
     $scope.counter.$save(0);
     $scope.counter[3].player--;
-    console.log($scope.counter[3].player);
+    $scope.counter.$save(3);
+    console.log("Next move to player " + $scope.counter[3].player);
     console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
     checkWin();
@@ -191,9 +194,13 @@ $scope.counter.$loaded(function(){
 
   function p1Wins() {
     console.log("X Wins!");
+    $scope.counter[1].p1WinTotal++;
+    $scope.counter.$save(1);
   }
   function p2Wins() {
-    console.log("O Wins!");
+    console.log("O Wins!")
+    $scope.counter[2].p2WinTotal++;
+    $scope.counter.$save(2);
   }
 
   // function clearBoxes() {
