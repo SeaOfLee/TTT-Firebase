@@ -36,3 +36,7 @@ h1 {
   font-family: 'Source Code Pro', Helvetica, sans-serif;
   font-size: 40px;
 }
+
+.playerWon {
+  color: red;
+}

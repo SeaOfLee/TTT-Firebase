@@ -13,8 +13,8 @@
 </head>
 <body ng-app="ticTacApp" ng-controller="ticTacCtrl">
 <h1 ng-hide="counter[4].p1Won == true || counter[5].p2Won == true">Tic  |  Tac  |  Toe</h1>
-<h1 ng-show="counter[4].p1Won">X WON!</h1>
-<h1 ng-show="counter[5].p2Won">O WON!</h1>
+<h1 class="playerWon" ng-show="counter[4].p1Won" ng-click="playAgain()">X WON! | CLICK TO PLAY AGAIN</h1>
+<h1 class="playerWon" ng-show="counter[5].p2Won" ng-click="playAgain()">O WON! | CLICK TO PLAY AGAIN</h1>
 <div id="main">
     <div id="container">
         <div class="square" 

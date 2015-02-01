@@ -159,6 +159,23 @@ $scope.counter.$loaded(function(){
     $scope.counter.$save(5);
   }
 
+  $scope.playAgain = function() {
+    console.log("clicked playAgain");
+    for (i = 0; i < 9; i++) {
+      $scope.board[i].choice = "";
+      $scope.board.$save(i);
+    }
+    $scope.counter[0].turnNumber = 0;
+     $scope.counter.$save(0);
+     $scope.counter[3].player = 1;
+     $scope.counter.$save(3);
+     $scope.counter[4].p1Won = false;
+     $scope.counter.$save(4);
+     $scope.counter[5].p2Won = false;
+     $scope.counter.$save(5);
+
+  }
+
 });//end of controller
 
 
