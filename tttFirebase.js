@@ -42,6 +42,7 @@ $scope.counter.$loaded(function(){
      $scope.counter.$add({player: 1});
      $scope.counter.$add({p1Won: false});
      $scope.counter.$add({p2Won: false});
+     $scope.counter.$add({tie: false});
    } 
    else {
      $scope.counter[0].turnNumber = 0;
@@ -56,6 +57,8 @@ $scope.counter.$loaded(function(){
      $scope.counter.$save(4);
      $scope.counter[5].p2Won = false;
      $scope.counter.$save(5);
+     $scope.counter[6].tie = false;
+     $scope.counter.$save(6);
    }
 
   });
@@ -141,9 +144,13 @@ $scope.counter.$loaded(function(){
     if (($scope.board[2].choice === "O") && ($scope.board[4].choice === "O") && ($scope.board[6].choice === "O")) {
       p2Wins();
     }
+    if (($scope.counter[0].turnNumber == 9) && (($scope.counter[4].p1Won === false) && ($scope.counter[5].p2Won == false))) {
+      tie();
+    }
   }
 
   // functions run when winner is chosen. Incremenets p1/p2WinTotal and saves value to firebase. 
+  // Changes p1/p2Won property values to true, which trigger ng-show/hide events.
   function p1Wins() {
     console.log("X Wins!");
     $scope.counter[1].p1WinTotal++;
@@ -159,12 +166,20 @@ $scope.counter.$loaded(function(){
     $scope.counter.$save(5);
   }
 
+  function tie() {
+    console.log("There was a tie");
+    $scope.counter[6].tie = true;
+    $scope.counter.$save(6);
+  }
+
+  // loops through board object in firebase and replaces choice properties with empty string.
   $scope.playAgain = function() {
     console.log("clicked playAgain");
     for (i = 0; i < 9; i++) {
       $scope.board[i].choice = "";
       $scope.board.$save(i);
     }
+    // resets turnNumber, starting player & p1/p2Won values in Firebase.
     $scope.counter[0].turnNumber = 0;
      $scope.counter.$save(0);
      $scope.counter[3].player = 1;
@@ -173,8 +188,10 @@ $scope.counter.$loaded(function(){
      $scope.counter.$save(4);
      $scope.counter[5].p2Won = false;
      $scope.counter.$save(5);
+     $scope.counter[6].tie = false;
+     $scope.counter.$save(6);
 
-  }
+  };
 
 });//end of controller
 
