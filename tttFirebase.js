@@ -58,17 +58,29 @@ $scope.counter.$loaded(function(){
     $scope.counter[0].turnNumber++;
     $scope.counter.$save(0);
     $scope.counter[3].player++;
-    console.log($scope.counter[3].player);
+    console.log("Next move to player " + $scope.counter[3].player);
+    console.log($scope.board[idx].choice);
     }
     else {
-    $scope.board[idx].choice = "0";
+    $scope.board[idx].choice = "O";
     $scope.board.$save($scope.board[idx]);
     $scope.counter[0].turnNumber++;
     $scope.counter.$save(0);
     $scope.counter[3].player--;
     console.log($scope.counter[3].player);
+    console.log($scope.board[idx].choice);
     }
+    checkWin();
   };
+
+  function checkWin() {
+    if (($scope.board[0].choice === "X") && ($scope.board[1].choice === "X") && ($scope.board[2].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[0].choice === "O") && ($scope.board[1].choice === "O") && ($scope.board[2].choice === "O")) {
+      p2Wins();
+    }
+  }
 // function to check if win conditions are met, will run after every turn. When winner is chosen p1/p2 win function is called.
 // function checkWin() {
 //   for(i = 0; i < 3; i++)
@@ -133,14 +145,10 @@ $scope.counter.$loaded(function(){
   // $scope.p2WinTotal = 0;
 
   function p1Wins() {
-    alert("X Wins!");
-    $scope.turnNumber = 0;
-    $scope.p1WinTotal++;
+    console.log("X Wins!");
   }
   function p2Wins() {
-    alert("O Wins!");
-    $scope.turnNumber = 0;
-    $scope.p2WinTotal++;
+    console.log("O Wins!");
   }
 
   // function clearBoxes() {
