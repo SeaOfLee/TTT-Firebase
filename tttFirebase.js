@@ -59,7 +59,7 @@ $scope.counter.$loaded(function(){
     $scope.counter.$save(0);
     $scope.counter[3].player++;
     console.log("Next move to player " + $scope.counter[3].player);
-    console.log($scope.board[idx].choice);
+    console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
     else {
     $scope.board[idx].choice = "O";
@@ -68,16 +68,61 @@ $scope.counter.$loaded(function(){
     $scope.counter.$save(0);
     $scope.counter[3].player--;
     console.log($scope.counter[3].player);
-    console.log($scope.board[idx].choice);
+    console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
     checkWin();
   };
 
   function checkWin() {
+    // checks for horizontal wins
     if (($scope.board[0].choice === "X") && ($scope.board[1].choice === "X") && ($scope.board[2].choice === "X")) {
       p1Wins();
     }
     if (($scope.board[0].choice === "O") && ($scope.board[1].choice === "O") && ($scope.board[2].choice === "O")) {
+      p2Wins();
+    }
+    if (($scope.board[3].choice === "X") && ($scope.board[4].choice === "X") && ($scope.board[5].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[3].choice === "O") && ($scope.board[4].choice === "O") && ($scope.board[5].choice === "O")) {
+      p2Wins();
+    }
+    if (($scope.board[6].choice === "X") && ($scope.board[7].choice === "X") && ($scope.board[8].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[6].choice === "O") && ($scope.board[7].choice === "O") && ($scope.board[8].choice === "O")) {
+      p2Wins();
+    }
+    // checks for vertical wins
+    if (($scope.board[0].choice === "X") && ($scope.board[3].choice === "X") && ($scope.board[6].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[0].choice === "O") && ($scope.board[3].choice === "O") && ($scope.board[6].choice === "O")) {
+      p2Wins();
+    }
+    if (($scope.board[1].choice === "X") && ($scope.board[4].choice === "X") && ($scope.board[7].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[1].choice === "O") && ($scope.board[4].choice === "O") && ($scope.board[7].choice === "O")) {
+      p2Wins();
+    }
+    if (($scope.board[2].choice === "X") && ($scope.board[5].choice === "X") && ($scope.board[8].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[2].choice === "O") && ($scope.board[5].choice === "O") && ($scope.board[8].choice === "O")) {
+      p2Wins();
+    }
+    // checks for diagonal wins
+    if (($scope.board[0].choice === "X") && ($scope.board[4].choice === "X") && ($scope.board[8].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[0].choice === "O") && ($scope.board[4].choice === "O") && ($scope.board[8].choice === "O")) {
+      p2Wins();
+    }
+    if (($scope.board[2].choice === "X") && ($scope.board[4].choice === "X") && ($scope.board[6].choice === "X")) {
+      p1Wins();
+    }
+    if (($scope.board[2].choice === "O") && ($scope.board[4].choice === "O") && ($scope.board[6].choice === "O")) {
       p2Wins();
     }
   }
