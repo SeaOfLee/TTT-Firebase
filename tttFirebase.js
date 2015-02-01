@@ -40,12 +40,22 @@ $scope.counter.$loaded(function(){
      $scope.counter.$add({p1WinTotal: 0});
      $scope.counter.$add({p2WinTotal: 0});
      $scope.counter.$add({player: 1});
+     $scope.counter.$add({p1Won: false});
+     $scope.counter.$add({p2Won: false});
    } 
    else {
      $scope.counter[0].turnNumber = 0;
      $scope.counter.$save(0);
+     $scope.counter[1].p1WinTotal = 0;
+     $scope.counter.$save(1);
+     $scope.counter[2].p2WinTotal = 0;
+     $scope.counter.$save(2);
      $scope.counter[3].player = 1;
      $scope.counter.$save(3);
+     $scope.counter[4].p1Won = false;
+     $scope.counter.$save(4);
+     $scope.counter[5].p2Won = false;
+     $scope.counter.$save(5);
    }
 
   });
@@ -138,23 +148,16 @@ $scope.counter.$loaded(function(){
     console.log("X Wins!");
     $scope.counter[1].p1WinTotal++;
     $scope.counter.$save(1);
+    $scope.counter[4].p1Won = true;
+    $scope.counter.$save(4);
   }
   function p2Wins() {
     console.log("O Wins!");
     $scope.counter[2].p2WinTotal++;
     $scope.counter.$save(2);
+    $scope.counter[5].p2Won = true;
+    $scope.counter.$save(5);
   }
-
-  // $scope.resetBoard = function() {
-  //   console.log("clicked reset")
-  //   for(i = 0; i < 9; i++) {
-  //     $scope.board.$save({choice: ''});
-  //   }
-  // };  
-  // function clearBoxes() {
-  //   for(i = 0;)
-  // }
-
 
 });//end of controller
 
