@@ -12,16 +12,16 @@
   <title>T/T/T</title>
 </head>
 <body ng-app="ticTacApp" ng-controller="ticTacCtrl">
-<h1>Tic  |  Tac  |  Toe</h1>
+<h1 ng-hide="counter[4].p1Won == true || counter[5].p2Won == true">Tic  |  Tac  |  Toe</h1>
+<h1 ng-show="counter[4].p1Won">X WON!</h1>
+<h1 ng-show="counter[5].p2Won">O WON!</h1>
 <div id="main">
     <div id="container">
         <div class="square" 
           ng-repeat="box in board" ng-click="makeChoice($index)" ng-bind="box.choice">
         </div>
       </div>
-    <div id="playerScore">X:{{counter[1].p1WinTotal}}  |  O:{{counter[2].p2WinTotal}}</div> 
-    <div id="p1Won" ng-show="counter[4].p1Won">X WON!</div>
-    <div id="p2Won" ng-show="counter[5].p2Won">O WON!</div>
+    <div id="playerScore">X:{{counter[1].p1WinTotal}}   |   O:{{counter[2].p2WinTotal}}</div> 
 </div>
 </div>
 
