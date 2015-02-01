@@ -63,6 +63,8 @@ $scope.counter.$loaded(function(){
      $scope.counter.$save(5);
      $scope.counter[6].tie = false;
      $scope.counter.$save(6);
+     $scope.counter[7].p1 = false;
+     $scope.counter[8].p2 = false;
    }
 
   });
@@ -72,16 +74,17 @@ $scope.counter.$loaded(function(){
   // Increments turnNumber and runs checkWin function after every click.
 
   $scope.makeChoice = function(idx) {
-    if($scope.counter[0].turnNumber == 0) {
+    if(($scope.counter[0].turnNumber == 0) && ($scope.counter[7].p1 == false)) {
       $scope.counter[7].p1 = true;
-      console.log("P1 is true");
+      console.log("P1 is set");
     }
     else if (($scope.counter[0].turnNumber == 1) && ($scope.counter[7].p1 == false)) {
       $scope.counter[8].p2 = true;
-      console.log("P2 is true");
+      console.log("P2 is set");
     }
+    // Marks X if it's player 1's turn, box is not already filled, & p1 value is true. End logic does not work. 
     console.log('clicked ' + idx + ' from makeChoice');
-    if(($scope.counter[3].player == 1) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O") && ($scope.counter[7].p1 === true)) {
+    if(($scope.counter[3].player == 1) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O") && ($scope.counter[7].p1 === true) && ($scope.counter[0].turnNumber >= 0) && (($scope.counter[4].p1Won === false) && ($scope.counter[5].p2Won === false))) {
     $scope.board[idx].choice = "X";
     $scope.board.$save($scope.board[idx]);
     $scope.counter[0].turnNumber++;
@@ -91,7 +94,8 @@ $scope.counter.$loaded(function(){
     console.log("Next move to player " + $scope.counter[3].player);
     console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
-    else if (($scope.counter[3].player == 2) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O") && ($scope.counter[8].p2 === true)){
+    // marks O if it's player 2's turn, box is not already filled & p2 value is true. End logic does not work.
+    else if (($scope.counter[3].player == 2) && ($scope.board[idx].choice !== "X") && ($scope.board[idx].choice !== "O") && ($scope.counter[8].p2 === true) && ($scope.counter[0].turnNumber > 0) && (($scope.counter[4].p1Won === false) && ($scope.counter[5].p2Won === false))){
     $scope.board[idx].choice = "O";
     $scope.board.$save($scope.board[idx]);
     $scope.counter[0].turnNumber++;
@@ -161,7 +165,7 @@ $scope.counter.$loaded(function(){
     }
   }
 
-  // functions run when winner is chosen. Incremenets p1/p2WinTotal and saves value to firebase. 
+  // functions run when winner is chosen. Increments p1/p2WinTotal and saves value to firebase. 
   // Changes p1/p2Won property values to true, which trigger ng-show/hide events.
   function p1Wins() {
     console.log("X Wins!");
@@ -191,7 +195,7 @@ $scope.counter.$loaded(function(){
       $scope.board[i].choice = "";
       $scope.board.$save(i);
     }
-    // resets turnNumber, starting player & p1/p2Won values in Firebase.
+    // resets turnNumber, starting player & p1/p2Won, tie values in Firebase. 
     $scope.counter[0].turnNumber = 0;
      $scope.counter.$save(0);
      $scope.counter[3].player = 1;
@@ -202,8 +206,8 @@ $scope.counter.$loaded(function(){
      $scope.counter.$save(5);
      $scope.counter[6].tie = false;
      $scope.counter.$save(6);
-     $scope.counter[7].p1 = false;
-     $scope.counter[8].p2 = false;
+     // $scope.counter[7].p1 = false;
+     // $scope.counter[8].p2 = false;
 
   };
 
