@@ -19,7 +19,7 @@
           ng-repeat="box in board" ng-click="makeChoice($index)" ng-bind="box.choice">
         </div>
       </div>
-    <div id="playerScore">X:{{counter.p1WinTotal}}</div>  
+    <div id="playerScore">X:{{counter[1].p1WinTotal}} | O:{{counter[2].p2WinTotal}}</div>  
 </div>
 </div>
 
