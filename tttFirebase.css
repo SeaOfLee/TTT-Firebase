@@ -1,4 +1,7 @@
 
+body {
+  max-height: 600px;
+}
 #container {
   width: 465px;
   height: 465px;
