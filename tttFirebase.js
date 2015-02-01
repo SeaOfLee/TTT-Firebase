@@ -59,7 +59,6 @@ $scope.counter.$loaded(function(){
     $scope.counter.$save(0);
     $scope.counter[3].player++;
     $scope.counter.$save(3);
-    // $scope.counter[3].player.$save();
     console.log("Next move to player " + $scope.counter[3].player);
     console.log("$scope.board[idx].choice is " + $scope.board[idx].choice);
     }
@@ -129,80 +128,25 @@ $scope.counter.$loaded(function(){
       p2Wins();
     }
   }
-// function to check if win conditions are met, will run after every turn. When winner is chosen p1/p2 win function is called.
-// function checkWin() {
-//   for(i = 0; i < 3; i++)
-//   // checks if horizontal rows are equal to each other and not equal to an empty string.
-//   if($scope.board[i][0] == $scope.board[i][1] && $scope.board[i][2] == $scope.board[i][0] && $scope.board[i][0] !== "" && $scope.board[i][0] == "X"){
-//     console.log("X win horizontal");
-//     p1Wins();
-//   }
-//   else if ($scope.board[i][0] == $scope.board[i][1] && $scope.board[i][2] == $scope.board[i][0] && $scope.board[i][0] !== "" && $scope.board[i][0] == "O"){
-//     console.log("O win horizontal");
-//     p2Wins();
-//   }
-//   // checks if vertical columns are equal to each other and not equal to an empty string.
-//   else if ($scope.board[0][i] == $scope.board[1][i] && $scope.board[2][i] == $scope.board[0][i] && $scope.board[0][i] !== "" && $scope.board[0][i] == "X") {
-//     console.log("X win vertical");
-//     p1Wins();
-//   }
-//   else if ($scope.board[0][i] == $scope.board[1][i] && $scope.board[2][i] == $scope.board[0][i] && $scope.board[0][i] !== "" && $scope.board[0][i] == "O") {
-//     console.log("O win vertical");
-//     p2Wins();
-//   // checks diagonal. only true when i = 0
-//   }
-//   else if ($scope.board[0][i] == $scope.board[1][i+1] && $scope.board[2][i +2] == $scope.board[0][i] && $scope.board[0][i] !== "" && $scope.board[0][i] == "X") {
-//     console.log("X win diagonal right");
-//     p1Wins();
-//   }
-//   else if ($scope.board[0][i] == $scope.board[1][i+1] && $scope.board[2][i +2] == $scope.board[0][i] && $scope.board[0][i] !== "" && $scope.board[0][i] == "O") {
-//     console.log("O win diagonal right");
-//     p2Wins();
-//   }
-//   //checks left diagonal. only true when i = 2
-//   else if ($scope.board[0][i] == $scope.board[1][i-1] && $scope.board[2][i-2] == $scope.board[0][i] && $scope.board[0][i] !== "" && $scope.board[0][i] == "X") {
-//     console.log("X win diagonal left");
-//     p1Wins();
-//   }
-//   else if ($scope.board[0][i] == $scope.board[1][i-1] && $scope.board[2][i-2] == $scope.board[0][i] && $scope.board[0][i] !== "" && $scope.board[0][i] == "O") {
-//     console.log("O win diagonal left");
-//     p2Wins();
-//   }
-//   // if turnNumber reaches 9 there's been no winner, tie condition is enforced.
-//   else if ($scope.turnNumber == 9) {
-//     console.log("TIE");
-//   }
-// }
-  // creates turnNumber property, will get incremented after every turn.
-  // $scope.counter = 0;
 
-  
-
-  // $scope.makeChoice = function(row, column) {
-  //   if(($scope.board[row][column] == "") && ($scope.turnNumber >=0)) {
-  //     var choice = ($scope.turnNumber % 2) == 0 ? "X" : "O";
-  //     $scope.board[row][column] = choice;
-  //     $scope.turnNumber++;
-  //     checkWin(choice);
-  //   }
-  //   console.log($scope.board);
-  // };
-
-  // Win totals increment after p1/p2Wins function is called. 
-  // $scope.p1WinTotal = 0;
-  // $scope.p2WinTotal = 0;
-
+  // functions run when winner is chosen. Incremenets p1/p2WinTotal and saves value to firebase. 
   function p1Wins() {
     console.log("X Wins!");
     $scope.counter[1].p1WinTotal++;
     $scope.counter.$save(1);
   }
   function p2Wins() {
-    console.log("O Wins!")
+    console.log("O Wins!");
     $scope.counter[2].p2WinTotal++;
     $scope.counter.$save(2);
   }
 
+  // $scope.resetBoard = function() {
+  //   console.log("clicked reset")
+  //   for(i = 0; i < 9; i++) {
+  //     $scope.board.$save({choice: ''});
+  //   }
+  // };  
   // function clearBoxes() {
   //   for(i = 0;)
   // }
