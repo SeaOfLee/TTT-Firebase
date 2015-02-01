@@ -11,17 +11,14 @@
   <script src="tttFirebase.js"></script>
   <title>T/T/T</title>
 </head>
-<body ng-app="ticTacApp">
+<body ng-app="ticTacApp" ng-controller="ticTacCtrl">
 <h1>Tic  |  Tac  |  Toe</h1>
 <div id="main">
-  <div ng-controller="ticTacCtrl">
     <div id="container">
         <div class="square" 
           ng-repeat="box in board" ng-click="makeChoice($index)" ng-bind="box.choice">
-          {{ cell == "" ? "&nbsp;" : cell }}
         </div>
       </div>
-    </div>
 </div>
 </div>
 

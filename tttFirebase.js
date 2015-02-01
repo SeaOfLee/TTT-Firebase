@@ -21,9 +21,11 @@ $scope.board.$loaded(function () {
       $scope.board.$add({choice: ''});
     }
   }
+  // if board object does exist on load, loops through each index [i] and replaces choice property with empty string.
   else {
     for (i = 0; i < 9; i++) {
-      $scope.board.$save({choice: ''});
+      $scope.board[i].choice = "";
+      $scope.board.$save(i);
     }
   }
 });
