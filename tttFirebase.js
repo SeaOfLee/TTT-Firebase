@@ -216,6 +216,10 @@ $scope.counter.$loaded(function(){
      $scope.counter.$save(8);
   };
 
+  $scope.reset = function(){
+        location.reload();
+    };
+
 });//end of controller
 
 
